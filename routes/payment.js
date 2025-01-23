@@ -8,7 +8,7 @@ const router = express.Router();
 const merchant_id = process.env.MERCHANT_ID; // Replace with your actual Merchant ID
 const merchant_secret = process.env.MERCHANT_SECRET; // Replace with your Merchant Secret
 
-router.post("/start", (req, res) => {
+router.post("/generate-hash", (req, res) => {
   const { order_id, amount, currency } = req.body;
   console.log("Payment request for order:", order_id);
 
@@ -35,7 +35,7 @@ router.post("/start", (req, res) => {
 });
 
 // Payment notification endpoint
-router.post("/notify", (req, res) => {
+router.post("/verify-payment", (req, res) => {
 
   console.log("Payment notification received");
   console.log(req.body);
