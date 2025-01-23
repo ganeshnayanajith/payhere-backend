@@ -31,7 +31,7 @@ router.post("/generate-hash", (req, res) => {
 
   console.log("Hash generated for order:", order_id);
 
-  res.json({ hash, merchant_id });
+  res.json({ data: hash });
 });
 
 // Payment notification endpoint
