@@ -12,6 +12,16 @@ router.post("/generate-hash", (req, res) => {
   const { order_id, amount, currency } = req.body;
   console.log("Payment request for order:", order_id);
 
+  console.log(`merchant_id: ${merchant_id}, merchant_secret: ${merchant_secret}`);
+
+  const hashed_merchant_secret = crypto
+    .createHash("md5")
+    .update(merchant_secret)
+    .digest("hex")
+    .toUpperCase();
+
+  console.log(`hashed_merchant_secret: ${hashed_merchant_secret}`);
+
   // Generate the hash value
   const hash = crypto
     .createHash("md5")
@@ -20,11 +30,7 @@ router.post("/generate-hash", (req, res) => {
       order_id +
       amount +
       currency +
-      crypto
-        .createHash("md5")
-        .update(merchant_secret)
-        .digest("hex")
-        .toUpperCase()
+      hashed_merchant_secret
     )
     .digest("hex")
     .toUpperCase();
